@@ -85,6 +85,7 @@ public class AstraController : MonoBehaviour
 
     private void OnDisable()
     {
+        StopStreamNoThrow(_colorStream);
         StopStreamNoThrow(_bodyStream);
         StopStreamNoThrow(_depthStream);
         _streamReader.Dispose();
