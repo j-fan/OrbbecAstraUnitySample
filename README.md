@@ -20,7 +20,7 @@ To update Orbbec Astra SDK this project depends on
 Update with your license key in main.cpp, in the variable `const char* licenseString = "<INSERT LICENSE KEY HERE>";`
 3. compile the project with the same target platform as your machine (either amd64 or x86 Windows)
 
-4.  Copy binaries compiled in OrbbecSDK/samples/vs2015/bin/Release to the /Assets/AstraSDK/Astra/{your platform} EXCEPT for AstraDotNet.dll (causes security errors?)
+4.  Copy binaries compiled in OrbbecSDK/samples/vs2015/bin/Release to the /Assets/AstraSDK/Astra/{your platform} 
     * the platform folder is either "amd64" or "x86". Create one if not present and delete the other. Only one set of binaries can be present as Unity gets confused.
 
 ## Credits
