@@ -8,7 +8,8 @@
 ## About
 * Contains examples of depth and colour streams and body tracking (joints only)
 * If you stand far back enough, spheres will appear representing joints
-* Body tracking will only work until March 21 2020, refer to instructions on how to add your own license if you have one
+* Body tracking will only work until March 21 2020
+* If you have your own licence, add it in AstraController.cs
 
 ## Credits
 Astra SDK dotnet wrapper

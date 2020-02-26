@@ -22,6 +22,7 @@ public class AstraController : MonoBehaviour
         // set up Astra
         AstraDotNetAssemblyResolver.Init();
         Astra.Context.Initialize();
+        AstraSdkInterop.SetLicenceKey("INSERT YOUR LICENSE KEY");
         var connectionString = $"device/sensor{SENSOR_INDEX}";
         _streamSet = Astra.StreamSet.Open(connectionString);
         _streamReader = _streamSet.CreateReader();
