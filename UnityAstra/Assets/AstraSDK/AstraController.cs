@@ -1,8 +1,16 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
+
+/*
+ * There should be one AstraController in the scene
+ * AstraController is responsible for initialising Astra
+ * and for grabbing frames and updating the subscribers to this class
+ * 
+ * Another script with a function named "YourFunctionName" may subscribe to a frame event with:
+ * AstraController.Instance.OnBodyTrackEvent += YourFunctionName
+ */
 
 public class AstraController : MonoBehaviour
 {
@@ -22,7 +30,7 @@ public class AstraController : MonoBehaviour
         // set up Astra
         AstraDotNetAssemblyResolver.Init();
         Astra.Context.Initialize();
-        AstraSdkInterop.SetLicenceKey("INSERT YOUR LICENSE KEY");
+        AstraSdkInterop.SetLicenceKey("<INSERT YOUR LICENCE KEY>");
         var connectionString = $"device/sensor{SENSOR_INDEX}";
         _streamSet = Astra.StreamSet.Open(connectionString);
         _streamReader = _streamSet.CreateReader();
@@ -38,6 +46,17 @@ public class AstraController : MonoBehaviour
         if (DepthEnabled)
         {
             _depthStream = _streamReader.GetStream<Astra.DepthStream>();
+            var mode = _depthStream.AvailableModes
+                .FirstOrDefault(m =>
+                    m.FramesPerSecond == AstraConstants.Fps
+                    && m.Width == AstraConstants.Width
+                    && m.Height == AstraConstants.Height);
+            if (mode != null)
+            {
+                _depthStream.SetMode(mode);
+            } else {
+                UnityEngine.Debug.LogWarning("Depth mode defined in AstraConstants not available on camera");
+            }
             _depthStream.Start();
         }
 
@@ -45,10 +64,22 @@ public class AstraController : MonoBehaviour
         if (ColorEnabled)
         {
             _colorStream = _streamReader.GetStream<Astra.ColorStream>();
+            var mode = _colorStream.AvailableModes
+                .FirstOrDefault(m =>
+                    m.FramesPerSecond == AstraConstants.Fps
+                    && m.Width == AstraConstants.Width
+                    && m.Height == AstraConstants.Height);
+            if (mode != null)
+            {
+                _colorStream.SetMode(mode);
+            } else
+            {
+                UnityEngine.Debug.LogWarning("Color mode defined in AstraConstants not available on camera");
+            }
             _colorStream.Start();
         }
-
     }
+
     void Update()
     {
         try

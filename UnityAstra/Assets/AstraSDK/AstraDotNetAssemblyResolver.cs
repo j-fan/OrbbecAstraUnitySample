@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-/*
- * Source code credit: https://github.com/bibigone/AstraDotNetDemo
- */
+
 public static class AstraDotNetAssemblyResolver
 {
     /// <summary>
