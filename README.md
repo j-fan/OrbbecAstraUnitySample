@@ -1,4 +1,6 @@
 # Orbbec Unity Sample
+<img src="preview.gif" alt="preview gif" width="500"/>
+
 ## Prerequisites
 * Windows machine
 * Orbbec Astra
