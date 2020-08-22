@@ -4,7 +4,7 @@
 ## Prerequisites
 * Windows machine
 * Orbbec Astra
-* Unity 2019.2.9f1 (could work for others, but only tested with this)
+* Unity 2019.4 (could work for others, but only tested with this)
 * Visual Studio 2019 (could work for others, but only tested with this)
 
 ## Features
