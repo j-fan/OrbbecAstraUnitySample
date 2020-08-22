@@ -14,6 +14,8 @@ using UnityEngine;
 
 public class AstraController : MonoBehaviour
 {
+
+    public bool HasDepthRegistration = true;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -57,8 +59,6 @@ public class AstraController : MonoBehaviour
             } else {
                 UnityEngine.Debug.LogWarning("Depth mode defined in AstraConstants not available on camera");
             }
-            // depth registration on seems to makes colour and depth stream alignment worse
-            AstraSdkInterop.SetDepthRegistration(_depthStream, false);
             _depthStream.Start();
         }
 
@@ -98,6 +98,7 @@ public class AstraController : MonoBehaviour
                     }
                     if (DepthEnabled)
                     {
+                        AstraSdkInterop.SetDepthRegistration(_depthStream, HasDepthRegistration);
                         var _depthFrame = frame.GetFrame<Astra.DepthFrame>();
                         OnDepthFrameEvent?.Invoke(_depthFrame);
                     }

@@ -15,7 +15,7 @@ void DepthToTexture (uint3 id : SV_DispatchThreadID)
 	uint maxSize = bufferLength - 1;
 	float depth = DepthBuffer[maxSize - i] / maxDistance;
 	if (DepthBuffer[maxSize - i] > cutOff) {
-		depth = maxDistance;
+		depth = 0;
 	}
 	DepthMap[id.xy] = float4(
 		depth,
